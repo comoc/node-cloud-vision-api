@@ -133,7 +133,7 @@ See more in [test_annotate_remote.js](https://github.com/tejitak/node-cloud-visi
 
 Recommended node version is above v4.0.0 because this module is implemented with ES6.
 
-# Additional information
+## Additional information
 
 * v1(not v1alpha1) API compliant
 * Base64 encoded image input avalilable
