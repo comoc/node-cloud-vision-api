@@ -1,6 +1,6 @@
 {
-  "name": "node-cloud-vision-api",
-  "version": "0.1.1-comoc",
+  "name": "node-cloud-vision-api-comoc",
+  "version": "0.1.1",
   "description": "Node client for Google Cloud Vision API",
   "main": "index.js",
   "scripts": {
