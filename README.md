@@ -1,5 +1,5 @@
 # Node Cloud Vision API
-node-cloud-vision-api is a node client wrapper for Cloud Vision API.
+node-cloud-vision-api-comoc is a node client wrapper for Cloud Vision API.
 
 Cloud Vision API Docs
 https://cloud.google.com/vision/docs/
@@ -17,6 +17,10 @@ LABEL_DETECTION | Run models to execute Image Content Analysis
 TEXT_DETECTION | Run models to execute OCR on an image
 SAFE_SEARCH_DETECTION | Run models to compute image safe search properties
 
+## Difference between this version and the original version: [tejitak/node-cloud-vision-api](https://github.com/tejitak/node-cloud-vision-api) 
+
+- v1(not v1alpha1) API compliant
+- Base64 encoded image input avalilable
 
 ## Setup
 ### Preparation
@@ -24,22 +28,22 @@ SAFE_SEARCH_DETECTION | Run models to compute image safe search properties
 - Cloud Vision API Key is needed
 
 ### Install
-` npm install node-cloud-vision-api --save`
+` npm install node-cloud-vision-api-comoc --save`
 
 ### Auth
-API requests on node-cloud-vision-api is internally managed by [google-api-nodejs-client](https://github.com/google/google-api-nodejs-client/)
+API requests on node-cloud-vision-api-comoc is internally managed by [google-api-nodejs-client](https://github.com/google/google-api-nodejs-client/)
 
 You can setup auth data with the following samples
 
 * Use Server Key
 ```JavaScript
-const vision = require('node-cloud-vision-api')
+const vision = require('node-cloud-vision-api-comoc')
 vision.init({auth: 'YOUR_API_KEY'})
 ```
 
 * Use OAuth
 ```JavaScript
-const vision = require('node-cloud-vision-api')
+const vision = require('node-cloud-vision-api-comoc')
 const google = require('googleapis')
 const oauth2Client = new google.auth.OAuth2('YOUR_GOOGLE_OAUTH_CLIENT_ID', 'YOUR_GOOGLE_OAUTH_SECRET', 'YOUR_GOOGLE_OAUTH_CALLBACK_URL')
 oauth2Client.setCredentials({refresh_token: 'YOUR_GOOGLE_OAUTH_REFRESH_TOKEN'})
@@ -53,7 +57,7 @@ vision.init({auth: oauth2Client})
 
 ```JavaScript
 'use strict'
-const vision = require('node-cloud-vision-api')
+const vision = require('node-cloud-vision-api-comoc')
 
 // init with auth
 vision.init({auth: 'YOUR_API_KEY'})
@@ -75,7 +79,7 @@ vision.annotate(req).then((res) => {
   console.log('Error: ', e)
 })
 ```
-See more in [test_annotate.js](https://github.com/tejitak/node-cloud-vision-api/blob/master/test_annotate.js)
+See more in [test_annotate.js](https://github.com/tejitak/node-cloud-vision-api-comoc/blob/master/test_annotate.js)
 
 ## Remote image file sample
 Image files on web can be specified with 'url' paramters in Image object
@@ -91,7 +95,7 @@ const req = new vision.Request({
   ]
 })
 ```
-See more in [test_annotate_remote.js](https://github.com/tejitak/node-cloud-vision-api/blob/master/test_annotate_remote.js)
+See more in [test_annotate_remote.js](https://github.com/tejitak/node-cloud-vision-api-comoc/blob/master/test_annotate_remote.js)
 
 ## Multiple Requests per API call
 
@@ -127,14 +131,23 @@ vision.annotate([req1, req2]).then((res) => {
   console.log('Error: ', e)
 })
 ```
-See more in [test_annotate_remote.js](https://github.com/tejitak/node-cloud-vision-api/blob/master/test_annotate_remote.js)
+See more in [test_annotate_remote.js](https://github.com/tejitak/node-cloud-vision-api-comoc/blob/master/test_annotate_remote.js)
 
+## Base64 encoded image sample
+Base64 enocded image data can be specified with 'base64' paramters in Image object
+
+```JavaScript
+const req = new vision.Request({
+  image: new vision.Image({
+    base64: '/9j/4AAQSkZJRgABAQ...' // someting like this
+  }),
+  features: [
+    new vision.Feature('FACE_DETECTION', 1),
+    new vision.Feature('LABEL_DETECTION', 10),
+  ]
+})
+```
 ## Supported Node Version
 
 Recommended node version is above v4.0.0 because this module is implemented with ES6.
-
-## Additional information
-
-* v1(not v1alpha1) API compliant
-* Base64 encoded image input avalilable
 
